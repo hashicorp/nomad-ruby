@@ -1,0 +1,25 @@
+{
+  "Job": {
+    "ID": "job",
+    "Name": "job",
+    "Type": "service",
+    "Datacenters": ["dc1"],
+    "TaskGroups": [
+      {
+        "Name": "group",
+        "Tasks": [
+          {
+            "Name": "task",
+            "Driver": "raw_exec",
+            "Config": {
+              "args": [
+                  "1000"
+              ],
+              "command": "/bin/sleep"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
