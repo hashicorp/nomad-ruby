@@ -7,7 +7,7 @@ module Nomad
     #
     # @return [Hash]
     def stringify_keys(hash)
-      hash.inject({}) do |h, (key, value)|
+      (hash || {}).inject({}) do |h, (key, value)|
         value = stringify_keys(value) if value.is_a?(Hash)
         h[key.to_s] = value
         h

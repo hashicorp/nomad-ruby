@@ -1,6 +1,8 @@
 require "date"
 require "time"
 
+require_relative "stringify"
+
 module Nomad
   class Response
     BUILTIN_LOADERS = {
@@ -19,6 +21,8 @@ module Nomad
           item
         end
       },
+
+      stringify_keys: ->(item) { Stringify.stringify_keys(item) },
     }.freeze
 
     # Defines a new field. This is designed to be used by the subclass as a
