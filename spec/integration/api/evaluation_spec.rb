@@ -35,15 +35,5 @@ module Nomad
         expect(result.id).to eq(id)
       end
     end
-
-    describe "#allocations_for" do
-      it "returns allocations" do
-        eval = subject.list.first { |e| !subject.allocations_for(e.id).empty? }
-        result = subject.allocations_for(eval.id)
-        expect(result).to be_a(Array)
-        expect(result[0]).to be_a(Alloc)
-        expect(result[0].eval_id).to eq(eval.id)
-      end
-    end
   end
 end
