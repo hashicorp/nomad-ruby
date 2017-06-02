@@ -228,7 +228,7 @@ module Nomad
 
     # @!attribute [r] megabits
     #   The network megabits.
-    #   @return [String]
+    #   @return [Fixnum]
     field :MBits, as: :megabits
 
     # @!attribute [r] reserved_ports

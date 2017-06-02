@@ -9,6 +9,9 @@ module Nomad
       # Parses an integer as a timestamp (18394289434).
       date_as_timestamp: ->(item) { Time.at(item) },
 
+      # Parses the given integer as a duration.
+      int_as_duration: ->(item) { Duration.new(item) },
+
       # Returns an empty array if the given item is nil, otherwise returns the
       # item.
       nil_as_array: ->(item) { item || [] },

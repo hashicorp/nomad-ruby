@@ -100,8 +100,8 @@ module Nomad
 
     # @!attribute [r] wait
     #   The evaluation wait.
-    #   @return [Fixnum]
-    field :Wait, as: :wait
+    #   @return [Duration]
+    field :Wait, as: :wait, load: :int_as_duration
 
     # @!attribute [r] next_eval
     #   The evaluation next_eval.
