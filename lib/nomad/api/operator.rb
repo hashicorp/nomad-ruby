@@ -57,7 +57,7 @@ module Nomad
       #   The list of servers
       #   @return [Array<ConfigurationItem>]
       field :Servers, as: :servers, load: ->(item) {
-        item.map { |i| RaftConfigurationItem.decode(i) }
+        Array(item).map { |i| RaftConfigurationItem.decode(i) }
       }
     end
 

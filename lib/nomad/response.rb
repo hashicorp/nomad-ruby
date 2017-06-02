@@ -6,6 +6,9 @@ require_relative "stringify"
 module Nomad
   class Response
     BUILTIN_LOADERS = {
+      # Loads an array as an array of strings
+      array_of_strings: ->(item) { Array(item).map(&:to_s) },
+
       # Parses an integer as a timestamp (18394289434).
       date_as_timestamp: ->(item) { Time.at(item) },
 
@@ -59,7 +62,9 @@ module Nomad
     # Decodes the given object (usually a Hash) into an instance of this class.
     #
     # @param object [Hash<Symbol, Object>]
+    # @return [Object, nil]
     def self.decode(object)
+      return nil if object.nil?
       self.new(object)
     end
 

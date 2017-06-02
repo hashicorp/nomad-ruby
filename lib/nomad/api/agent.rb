@@ -108,7 +108,7 @@ module Nomad
     #   The list of known peer members
     #   @return [Array<AgentMember>]
     field :Members, as: :members, load: ->(item) {
-      item.map { |i| AgentMember.decode(i) }
+      Array(item).map { |i| AgentMember.decode(i) }
     }
   end
 

@@ -214,17 +214,17 @@ module Nomad
     # @!attribute [r] device
     #   The network device.
     #   @return [String]
-    field :Device, as: :device
+    field :Device, as: :device, load: :string_as_nil
 
     # @!attribute [r] cidr
     #   The network cidr.
     #   @return [String]
-    field :CIDR, as: :cidr
+    field :CIDR, as: :cidr, load: :string_as_nil
 
     # @!attribute [r] ip
     #   The network ip.
     #   @return [String]
-    field :IP, as: :ip
+    field :IP, as: :ip, load: :string_as_nil
 
     # @!attribute [r] megabits
     #   The network megabits.
