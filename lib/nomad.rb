@@ -2,6 +2,7 @@ module Nomad
   require_relative "nomad/errors"
   require_relative "nomad/client"
   require_relative "nomad/configurable"
+  require_relative "nomad/duration"
   require_relative "nomad/defaults"
   require_relative "nomad/response"
   require_relative "nomad/version"
