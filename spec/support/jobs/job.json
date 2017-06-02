@@ -1,25 +1,186 @@
 {
   "Job": {
+    "Stop": null,
+    "Region": "global",
     "ID": "job",
+    "ParentID": null,
     "Name": "job",
     "Type": "service",
-    "Datacenters": ["dc1"],
+    "Priority": 50,
+    "AllAtOnce": true,
+    "Datacenters": [
+      "dc1"
+    ],
+    "Constraints": null,
     "TaskGroups": [
       {
         "Name": "group",
+        "Count": 3,
+        "Constraints": null,
         "Tasks": [
           {
             "Name": "task",
             "Driver": "raw_exec",
+            "User": "",
             "Config": {
               "args": [
-                  "1000"
+                "1000"
               ],
               "command": "/bin/sleep"
-            }
+            },
+            "Constraints": null,
+            "Env": {
+              "key": "value"
+            },
+            "Services": [
+              {
+                "Id": "",
+                "Name": "service-1",
+                "Tags": [
+                  "tag1"
+                ],
+                "PortLabel": "db",
+                "Checks": [
+                  {
+                    "Id": "",
+                    "Name": "alive",
+                    "Type": "tcp",
+                    "Command": "",
+                    "Args": null,
+                    "Path": "",
+                    "Protocol": "",
+                    "PortLabel": "",
+                    "Interval": 10000000000,
+                    "Timeout": 2000000000,
+                    "InitialStatus": "",
+                    "TLSSkipVerify": false
+                  },
+                  {
+                    "Id": "",
+                    "Name": "still-alive",
+                    "Type": "http",
+                    "Command": "",
+                    "Args": null,
+                    "Path": "/",
+                    "Protocol": "",
+                    "PortLabel": "",
+                    "Interval": 10000000000,
+                    "Timeout": 2000000000,
+                    "InitialStatus": "",
+                    "TLSSkipVerify": false
+                  }
+                ]
+              },
+              {
+                "Id": "",
+                "Name": "service-2",
+                "Tags": null,
+                "PortLabel": "db",
+                "Checks": null
+              }
+            ],
+            "Resources": {
+              "CPU": 20,
+              "MemoryMB": 12,
+              "DiskMB": null,
+              "IOPS": null,
+              "Networks": [
+                {
+                  "Device": "",
+                  "CIDR": "",
+                  "IP": "",
+                  "MBits": 1,
+                  "ReservedPorts": null,
+                  "DynamicPorts": [
+                    {
+                      "Label": "db",
+                      "Value": 0
+                    },
+                    {
+                      "Label": "http",
+                      "Value": 0
+                    }
+                  ]
+                }
+              ]
+            },
+            "Meta": {
+              "zane": "willow"
+            },
+            "KillTimeout": 250000000,
+            "LogConfig": {
+              "MaxFiles": 1,
+              "MaxFileSizeMB": 2
+            },
+            "Artifacts": [
+              {
+                "GetterSource": "https://github.com/hashicorp/http-echo/releases/download/v0.2.3/http-echo_0.2.3_SHA256SUMS",
+                "GetterOptions": {
+                  "checksum": "md5:d2267250309a62b032b2b43312c81fec"
+                },
+                "RelativeDest": null
+              }
+            ],
+            "Vault": null,
+            "Templates": [
+              {
+                "SourcePath": null,
+                "DestPath": "local/file-1.yml",
+                "EmbeddedTmpl": "key: {{ key \"service/my-key\" }}",
+                "ChangeMode": "signal",
+                "ChangeSignal": "SIGHUP",
+                "Splay": 5000000000,
+                "Perms": "0644",
+                "LeftDelim": null,
+                "RightDelim": null
+              },
+              {
+                "SourcePath": "local/http-echo_0.2.3_SHA256SUMS",
+                "DestPath": "local/file-2.yml",
+                "EmbeddedTmpl": null,
+                "ChangeMode": "signal",
+                "ChangeSignal": "SIGHUP",
+                "Splay": 5000000000,
+                "Perms": "0644",
+                "LeftDelim": null,
+                "RightDelim": null
+              }
+            ],
+            "DispatchPayload": null,
+            "Leader": false
           }
-        ]
+        ],
+        "RestartPolicy": {
+          "Interval": 300000000000,
+          "Attempts": 10,
+          "Delay": 25000000000,
+          "Mode": "delay"
+        },
+        "EphemeralDisk": {
+          "Sticky": null,
+          "Migrate": null,
+          "SizeMB": 10
+        },
+        "Update": null,
+        "Meta": {
+          "zip": "zap"
+        }
       }
-    ]
+    ],
+    "Update": null,
+    "Periodic": null,
+    "ParameterizedJob": null,
+    "Payload": null,
+    "Meta": {
+      "foo": "bar"
+    },
+    "VaultToken": "root",
+    "Status": null,
+    "StatusDescription": null,
+    "Stable": null,
+    "Version": null,
+    "CreateIndex": null,
+    "ModifyIndex": null,
+    "JobModifyIndex": null
   }
 }
