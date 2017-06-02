@@ -5,6 +5,7 @@ module Nomad
   require_relative "nomad/duration"
   require_relative "nomad/defaults"
   require_relative "nomad/response"
+  require_relative "nomad/size"
   require_relative "nomad/version"
 
   require_relative "nomad/api"

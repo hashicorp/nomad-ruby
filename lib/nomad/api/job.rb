@@ -581,8 +581,8 @@ module Nomad
 
     # @!attribute [r] size
     #   The ephemeral disk size in MB.
-    #   @return [Fixnum]
-    field :SizeMB, as: :size
+    #   @return [Size]
+    field :SizeMB, as: :size, load: :int_as_size_in_megabytes
 
     # @!attribute [r] migrate
     #   The ephemeral disk migrate.
@@ -688,7 +688,8 @@ module Nomad
 
     # @!attribute [r] max_file_size
     #   The log config max_file_size.
-    field :MaxFileSizeMB, as: :max_file_size
+    #   @return [Size]
+    field :MaxFileSizeMB, as: :max_file_size, load: :int_as_size_in_megabytes
   end
 
   class JobService < Response

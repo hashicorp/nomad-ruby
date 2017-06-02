@@ -189,13 +189,13 @@ module Nomad
 
     # @!attribute [r] memory
     #   The node memory.
-    #   @return [Fixnum]
-    field :MemoryMB, as: :memory
+    #   @return [Size]
+    field :MemoryMB, as: :memory, load: :int_as_size_in_megabytes
 
     # @!attribute [r] disk
     #   The node disk.
-    #   @return [Fixnum]
-    field :DiskMB, as: :disk
+    #   @return [Size]
+    field :DiskMB, as: :disk, load: :int_as_size_in_megabytes
 
     # @!attribute [r] iops
     #   The node iops.
@@ -229,7 +229,7 @@ module Nomad
     # @!attribute [r] megabits
     #   The network megabits.
     #   @return [Fixnum]
-    field :MBits, as: :megabits
+    field :MBits, as: :megabits, load: :int_as_size_in_megabits
 
     # @!attribute [r] reserved_ports
     #   The network reserved_ports.
