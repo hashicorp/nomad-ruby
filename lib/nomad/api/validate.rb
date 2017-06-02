@@ -24,10 +24,10 @@ module Nomad
   end
 
   class JobValidation < Response
-    # @!attribute [r] driver_config_validated?
-    #   The evaluation driver_config_validated?.
+    # @!attribute [r] driver_config_validated
+    #   The evaluation driver_config_validated.
     #   @return [Boolean]
-    field :DriverConfigValidated, as: :driver_config_validated?
+    field :DriverConfigValidated, as: :driver_config_validated
 
     # @!attribute [r] validation_errors
     #   The evaluation validation_errors.

@@ -104,10 +104,10 @@ module Nomad
     #   @return [String]
     field :HTTPAddr, as: :http_addr
 
-    # @!attribute [r] tls_enabled?
-    #   The node tls_enabled?.
+    # @!attribute [r] tls_enabled
+    #   The node tls_enabled.
     #   @return [Boolean]
-    field :TLSEnabled, as: :tls_enabled?
+    field :TLSEnabled, as: :tls_enabled
 
     # @!attribute [r] attributes
     #   The node attributes.
@@ -144,10 +144,10 @@ module Nomad
     #   @return [String]
     field :ComputedClass, as: :computed_class, load: :string_as_nil
 
-    # @!attribute [r] drain?
-    #   The node drain.
+    # @!attribute [r] drain
+    #   The node drain
     #   @return [Boolean]
-    field :Drain, as: :drain?
+    field :Drain, as: :drain
 
     # @!attribute [r] status
     #   The node status.
@@ -199,7 +199,7 @@ module Nomad
 
     # @!attribute [r] iops
     #   The node iops.
-    #   @return [String]
+    #   @return [Fixnum]
     field :IOPS, as: :iops
 
     # @!attribute [r] networks
@@ -306,10 +306,10 @@ module Nomad
     #   @return [Fixnum]
     field :LastContact, as: :last_contact
 
-    # @!attribute [r] known_leader?
-    #   The evaluation known_leader?.
+    # @!attribute [r] known_leader
+    #   The evaluation known_leader.
     #   @return [Boolean]
-    field :KnownLeader, as: :known_leader?
+    field :KnownLeader, as: :known_leader
   end
 
   class Server < Response

@@ -79,15 +79,15 @@ module Nomad
       #   @return [String]
       field :Address, as: :address
 
-      # @!attribute [r] leader?
+      # @!attribute [r] leader
       #   Determines if this server is a leader in the raft subsystem.
       #   @return [Boolean]
-      field :Leader, as: :leader?
+      field :Leader, as: :leader
 
-      # @!attribute [r] voter?
+      # @!attribute [r] voter
       #   Indicates if the server has a vote in the raft configuration.
       #   @return [Boolean]
-      field :Voter, as: :voter?
+      field :Voter, as: :voter
     end
   end
 end

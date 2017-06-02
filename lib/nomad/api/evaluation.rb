@@ -128,15 +128,15 @@ module Nomad
     #   @return [String]
     field :ClassEligibility, as: :class_eligibility
 
-    # @!attribute [r] escaped_computed_class?
-    #   The evaluation escaped_computed_class?.
+    # @!attribute [r] escaped_computed_class
+    #   The evaluation escaped_computed_class.
     #   @return [Boolean]
-    field :EscaledComputedClass, as: :escaped_computed_class?
+    field :EscaledComputedClass, as: :escaped_computed_class
 
-    # @!attribute [r] annotate_plan?
-    #   The evaluation annotate_plan?.
+    # @!attribute [r] annotate_plan
+    #   The evaluation annotate_plan.
     #   @return [Boolean]
-    field :AnnotatePlan, as: :annotate_plan?
+    field :AnnotatePlan, as: :annotate_plan
 
     # @!attribute [r] snapshot_index
     #   The evaluation snapshot_index.

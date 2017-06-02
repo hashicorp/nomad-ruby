@@ -43,7 +43,7 @@ module Nomad
         node_id = subject.list[0].id
         result = subject.drain(node_id)
         expect(result).to be
-        expect(result.known_leader?).to be(false)
+        expect(result.known_leader).to be(false)
         result = subject.drain(node_id, false)
         expect(result).to be
       end

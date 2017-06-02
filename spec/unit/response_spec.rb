@@ -15,7 +15,7 @@ module Nomad
 
         expect(instance.to_h).to eq({
           a: "a",
-          b: "b",
+          c: "b",
           d: nil,
         })
       end

@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module Nomad
-  describe Job, :focus do
+  describe Job do
     subject { nomad_test_client.job }
 
     before(:context) {
@@ -15,8 +15,6 @@ module Nomad
         expect(result).to be
         expect(result[0].name).to eq("job")
         expect(result[0].job_summary).to be
-
-        pp result
       end
     end
 
@@ -34,7 +32,7 @@ module Nomad
       it "reads a job" do
         job = subject.read("job")
         expect(job).to be_a(JobVersion)
-        expect(job.all_at_once?).to be(true)
+        expect(job.all_at_once).to be(true)
         expect(job.constraints.size).to eq(0)
         expect(job.create_index).to be_a(Integer)
         expect(job.datacenters).to eq(["dc1"])
@@ -48,11 +46,11 @@ module Nomad
         expect(job.payload).to be(nil)
         expect(job.periodic).to be(nil)
         expect(job.region).to eq("global")
-        expect(job.stable?).to be(false)
+        expect(job.stable).to be(false)
         expect(job.status).to eq("running")
         expect(job.running?).to be(true)
         expect(job.status_description).to be(nil)
-        expect(job.stop?).to be(false)
+        expect(job.stop).to be(false)
 
         group = job.groups[0]
         expect(group).to be
@@ -62,9 +60,9 @@ module Nomad
         expect(group.constraints[0].r_target).to eq("SIGHUP")
         expect(group.count).to eq(3)
         expect(group.ephemeral_disk).to be
-        expect(group.ephemeral_disk.migrate?).to be(false)
-        expect(group.ephemeral_disk.size).to eq(10)
-        expect(group.ephemeral_disk.sticky?).to be(false)
+        expect(group.ephemeral_disk.migrate).to be(false)
+        expect(group.ephemeral_disk.size).to eq(10*Size::MEGABYTE)
+        expect(group.ephemeral_disk.sticky).to be(false)
         expect(group.meta).to eq({"zip" => "zap"})
         expect(group.name).to eq("group")
         expect(group.restart_policy).to be
@@ -85,8 +83,8 @@ module Nomad
         expect(task.driver).to eq("raw_exec")
         expect(task.env).to eq({"key" => "value"})
         expect(task.kill_timeout).to eq(250*Duration::MILLI_SECOND)
-        expect(task.leader?).to be(false)
-        expect(task.log_config.max_file_size).to eq(2)
+        expect(task.leader).to be(false)
+        expect(task.log_config.max_file_size).to eq(2*Size::MEGABYTE)
         expect(task.log_config.max_files).to eq(1)
         expect(task.meta).to eq({"zane" => "willow"})
         expect(task.name).to eq("task")
@@ -96,7 +94,7 @@ module Nomad
         expect(resources.cpu).to eq(20)
         expect(resources.disk).to eq(0)
         expect(resources.iops).to eq(0)
-        expect(resources.memory).to eq(12)
+        expect(resources.memory).to eq(12*Size::MEGABYTE)
 
         network = resources.networks[0]
         expect(network).to be
@@ -107,7 +105,7 @@ module Nomad
         expect(network.dynamic_ports[1].label).to eq("http")
         expect(network.dynamic_ports[1].value).to eq(0)
         expect(network.ip).to be(nil)
-        expect(network.megabits).to eq(1)
+        expect(network.megabits).to eq(1*Size::MEGABIT)
         expect(network.reserved_ports).to eq([])
 
         service1 = task.services[0]
@@ -124,7 +122,7 @@ module Nomad
         expect(service1.checks[0].port_label).to be(nil)
         expect(service1.checks[0].protocol).to be(nil)
         expect(service1.checks[0].timeout).to eq(2*Duration::SECOND)
-        expect(service1.checks[0].tls_skip_verify?).to be(false)
+        expect(service1.checks[0].tls_skip_verify).to be(false)
         expect(service1.checks[0].type).to eq("tcp")
         expect(service1.checks[1].args).to eq([])
         expect(service1.checks[1].command).to be(nil)
@@ -135,7 +133,7 @@ module Nomad
         expect(service1.checks[1].port_label).to be(nil)
         expect(service1.checks[1].protocol).to be(nil)
         expect(service1.checks[1].timeout).to eq(2*Duration::SECOND)
-        expect(service1.checks[1].tls_skip_verify?).to be(false)
+        expect(service1.checks[1].tls_skip_verify).to be(false)
         expect(service1.checks[1].type).to eq("http")
 
         service2 = task.services[1]
@@ -149,7 +147,7 @@ module Nomad
         expect(task.templates[0].change_signal).to eq("SIGHUP")
         expect(task.templates[0].destination).to eq("local/file-1.yml")
         expect(task.templates[0].data).to eq("key: {{ key \"service/my-key\" }}")
-        expect(task.templates[0].env?).to be(false)
+        expect(task.templates[0].env).to be(false)
         expect(task.templates[0].left_delim).to eq("{{")
         expect(task.templates[0].permissions).to eq("0644")
         expect(task.templates[0].right_delim).to eq("}}")
@@ -160,7 +158,7 @@ module Nomad
         expect(task.templates[1].change_signal).to eq("SIGHUP")
         expect(task.templates[1].destination).to eq("local/file-2.yml")
         expect(task.templates[1].data).to be(nil)
-        expect(task.templates[1].env?).to be(false)
+        expect(task.templates[1].env).to be(false)
         expect(task.templates[1].left_delim).to eq("{{")
         expect(task.templates[1].permissions).to eq("0644")
         expect(task.templates[1].right_delim).to eq("}}")

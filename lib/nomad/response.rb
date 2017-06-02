@@ -10,10 +10,16 @@ module Nomad
       array_of_strings: ->(item) { Array(item).map(&:to_s) },
 
       # Parses an integer as a timestamp (18394289434).
-      date_as_timestamp: ->(item) { Time.at(item) },
+      date_as_timestamp: ->(item) { Time.at(item || 0) },
 
       # Parses the given integer as a duration.
-      int_as_duration: ->(item) { Duration.new(item) },
+      int_as_duration: ->(item) { Duration.new(item || 0) },
+
+      # Parses the given integer as a "size".
+      int_as_size_in_megabytes: ->(item) { Size.new(Float(item || 0) * Size::MEGABYTE) },
+
+      # Parses the given integer as a "size".
+      int_as_size_in_megabits: ->(item) { Size.new(Float(item || 0) * Size::MEGABIT) },
 
       # Returns an empty array if the given item is nil, otherwise returns the
       # item.
@@ -48,9 +54,8 @@ module Nomad
     def self.field(n, opts = {})
       self.fields[n] = opts
 
-      define_method(opts[:as] || n) do
-        instance_variable_get(:"@#{ivar_for(n)}")
-      end
+      opts[:as] = (opts[:as] || n).to_sym
+      attr_reader opts[:as]
     end
 
     # Returns the list of fields defined on this subclass.
@@ -68,15 +73,15 @@ module Nomad
       self.new(object)
     end
 
-    def initialize(opts = {})
+    def initialize(input = {})
       # Initialize all fields as nil to start
       self.class.fields.each do |n, opts|
-        instance_variable_set(:"@#{ivar_for(n)}", nil)
+        instance_variable_set(:"@#{opts[:as]}", nil)
       end
 
       # For each supplied option, set the instance variable if it was defined
       # as a field.
-      opts.each do |n, v|
+      input.each do |n, v|
         if self.class.fields.key?(n)
           opts = self.class.fields[n]
 
@@ -92,7 +97,7 @@ module Nomad
             v = v.freeze
           end
 
-          instance_variable_set(:"@#{ivar_for(n)}", v)
+          instance_variable_set(:"@#{opts[:as]}", v)
         end
       end
     end
@@ -102,33 +107,19 @@ module Nomad
     # @return [Hash]
     def to_h
       self.class.fields.inject({}) do |h, (n, opts)|
-        result = self.public_send(opts[:as] || n)
+        result = self.public_send(opts[:as])
 
         if !result.nil? && !result.is_a?(Array) && result.respond_to?(:to_h)
           result = result.to_h
         end
 
-        h[ivar_for(n)] = result
+        h[opts[:as]] = result
         h
       end
     end
 
     def ==(other)
       self.to_h == other.to_h
-    end
-
-    private
-
-    def ivar_for(name)
-      name = name.to_s
-      name.gsub!(/([A-Z]+)([A-Z][a-z])/, '\1_\2')
-      name.gsub!(/([a-z\d])([A-Z])/, '\1_\2')
-      name.tr!('-', '_')
-      name.gsub!(/\s/, '_')
-      name.gsub!(/__+/, '_')
-      name.gsub!(/[^[:word:]+]/i, '_')
-      name.downcase!
-      return name.to_sym
     end
   end
 end

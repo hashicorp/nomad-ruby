@@ -79,20 +79,20 @@ module Nomad
     #   @return [Fixnum]
     field :Priority, as: :priority
 
-    # @!attribute [r] periodic?
-    #   The job periodic?.
+    # @!attribute [r] periodic
+    #   The job periodic.
     #   @return [Boolean]
-    field :Periodic, as: :periodic?
+    field :Periodic, as: :periodic
 
-    # @!attribute [r] parameterized?
-    #   The job parameterized?.
+    # @!attribute [r] parameterized
+    #   The job parameterized.
     #   @return [Boolean]
-    field :Parameterized, as: :parameterized?
+    field :Parameterized, as: :parameterized
 
-    # @!attribute [r] stop?
-    #   The job stop?.
+    # @!attribute [r] stop
+    #   The job stop.
     #   @return [Boolean]
-    field :Stop, as: :stop?
+    field :Stop, as: :stop
 
     # @!attribute [r] status
     #   The job status.
@@ -243,19 +243,19 @@ module Nomad
     #   @return [Fixnum]
     field :LastContact, as: :last_contact
 
-    # @!attribute [r] known_leader?
-    #   The job known_leader?.
+    # @!attribute [r] known_leader
+    #   The job known_leader.
     #   @return [Boolean]
-    field :KnownLeader, as: :known_leader?
+    field :KnownLeader, as: :known_leader
   end
 
   class JobVersion < Response
     STATUS_RUNNING = "running".freeze
 
-    # @!attribute [r] stop?
-    #   The job stop?.
+    # @!attribute [r] stop
+    #   The job stop.
     #   @return [Boolean]
-    field :Stop, as: :stop?
+    field :Stop, as: :stop
 
     # @!attribute [r] id
     #   The job id.
@@ -282,10 +282,10 @@ module Nomad
     #   @return [Fixnum]
     field :Priority, as: :priority
 
-    # @!attribute [r] all_at_once?
-    #   The job all_at_once?.
+    # @!attribute [r] all_at_once
+    #   The job all_at_once.
     #   @return [Boolean]
-    field :AllAtOnce, as: :all_at_once?
+    field :AllAtOnce, as: :all_at_once
 
     # @!attribute [r] region
     #   The job region.
@@ -336,10 +336,10 @@ module Nomad
     #   @return [String]
     field :VaultToken, as: :vault_token, load: :string_as_nil
 
-    # @!attribute [r] stable?
-    #   The job stable?.
+    # @!attribute [r] stable
+    #   The job stable.
     #   @return [Boolean]
-    field :Stable, as: :stable?
+    field :Stable, as: :stable
 
     # @!attribute [r] status
     #   The job status.
@@ -456,7 +456,7 @@ module Nomad
 
     # @!attribute [r] max_parallel
     #   The job max_parallel.
-    #   @return [String]
+    #   @return [Fixnum]
     field :MaxParallel, as: :max_parallel
 
     # @!attribute [r] health_check
@@ -474,10 +474,10 @@ module Nomad
     #   @return [Duration]
     field :HealthyDeadline, as: :healthy_deadline, load: :int_as_duration
 
-    # @!attribute [r] auto_revert?
-    #   The job auto_revert?.
+    # @!attribute [r] auto_revert
+    #   The job auto_revert.
     #   @return [Boolean]
-    field :AutoRevert, as: :auto_revert?
+    field :AutoRevert, as: :auto_revert
 
     # @!attribute [r] canary
     #   The job canary.
@@ -486,10 +486,10 @@ module Nomad
   end
 
   class JobPeriodic < Response
-    # @!attribute [r] enabled?
-    #   The periodic enabled?.
+    # @!attribute [r] enabled
+    #   The periodic enabled.
     #   @return [Boolean]
-    field :Enabled, as: :enabled?
+    field :Enabled, as: :enabled
 
     # @!attribute [r] spec
     #   The periodic spec.
@@ -501,10 +501,10 @@ module Nomad
     #   @return [String]
     field :SpecType, as: :spec_type
 
-    # @!attribute [r] prohibit_overlap?
-    #   The periodic prohibit_overlap?.
+    # @!attribute [r] prohibit_overlap
+    #   The periodic prohibit_overlap.
     #   @return [Boolean]
-    field :ProhibitOverlap, as: :prohibit_overlap?
+    field :ProhibitOverlap, as: :prohibit_overlap
 
     # @!attribute [r] timezone
     #   The periodic timezone.
@@ -574,20 +574,20 @@ module Nomad
   end
 
   class JobEphemeralDisk < Response
-    # @!attribute [r] sticky?
-    #   The ephemeral disk sticky?.
+    # @!attribute [r] sticky
+    #   The ephemeral disk sticky.
     #   @return [Boolean]
-    field :Sticky, as: :sticky?
+    field :Sticky, as: :sticky
 
     # @!attribute [r] size
     #   The ephemeral disk size in MB.
     #   @return [Fixnum]
     field :SizeMB, as: :size
 
-    # @!attribute [r] migrate?
-    #   The ephemeral disk migrate?.
+    # @!attribute [r] migrate
+    #   The ephemeral disk migrate.
     #   @return [Boolean]
-    field :Migrate, as: :migrate?
+    field :Migrate, as: :migrate
   end
 
   class JobTask < Response
@@ -674,10 +674,10 @@ module Nomad
     #   @return [String]
     field :DispatchPayload, as: :dispatch_payload, load: ->(item) { JobDispatchPayload.decode(item) }
 
-    # @!attribute [r] leader?
-    #   The task leader?.
+    # @!attribute [r] leader
+    #   The task leader.
     #   @return [Boolean]
-    field :Leader, as: :leader?
+    field :Leader, as: :leader
   end
 
   class JobLogConfig < Response
@@ -688,7 +688,6 @@ module Nomad
 
     # @!attribute [r] max_file_size
     #   The log config max_file_size.
-    #   @return [Fixnum]
     field :MaxFileSizeMB, as: :max_file_size
   end
 
@@ -767,10 +766,10 @@ module Nomad
     #   @return [String]
     field :InitialStatus, as: :initial_status, load: :string_as_nil
 
-    # @!attribute [r] tls_skip_verify?
-    #   The check tls_skip_verify?.
+    # @!attribute [r] tls_skip_verify
+    #   The check tls_skip_verify.
     #   @return [Boolean]
-    field :TLSSkipVerify, as: :tls_skip_verify?
+    field :TLSSkipVerify, as: :tls_skip_verify
   end
 
   class JobArtifact < Response
@@ -796,10 +795,10 @@ module Nomad
     #   @return [Array<String>]
     field :Policies, as: :policies, load: :array_of_strings
 
-    # @!attribute [r] env?
-    #   The vault env?.
+    # @!attribute [r] env
+    #   The vault env.
     #   @return [Boolean]
-    field :Env, as: :env?
+    field :Env, as: :env
 
     # @!attribute [r] change_mode
     #   The vault change_mode.
@@ -858,10 +857,10 @@ module Nomad
     #   @return [String]
     field :RightDelim, as: :right_delim, load: :string_as_nil
 
-    # @!attribute [r] env?
-    #   The template env?.
+    # @!attribute [r] env
+    #   The template env.
     #   @return [Boolean]
-    field :Envvars, as: :env?
+    field :Envvars, as: :env
   end
 
   class JobDispatchPayload < Response
