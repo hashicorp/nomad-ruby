@@ -19,10 +19,10 @@ module Nomad
   #
   # @example Human print the time
   #   60*Duration::Second.to_s #=> "60s"
-  #   Duration.new(248902890389024).to_human #=> "2d21h8m22s890ms389us24ns"
+  #   Duration.new(248902890389024).to_s #=> "2d21h8m22s890ms389us24ns"
   #
   # @example Human print the time up to seconds, ignoring anything less that seconds
-  #   Duration.new(248902890389024).to_human(:s) #=> "2d21h8m22s"
+  #   Duration.new(248902890389024).to_s(:s) #=> "2d21h8m22s"
   class Duration
     NANO_SECOND  = Float(1)
     MICRO_SECOND = 1_000 * NANO_SECOND
@@ -63,7 +63,7 @@ module Nomad
     # @example More human friendly
     #   Duration.new(3*Duration::HOUR) # 3 hours
     def initialize(ns)
-      @ns = Float(ns)
+      @ns = Float(ns || 0)
     end
 
     # The complete number of nanoseconds. This will always be a whole number,
@@ -151,18 +151,14 @@ module Nomad
     # An optional "highest label" may be supplied to limit the output to a
     # particular label.
     #
-    # NOTE: this method does its best to be performant, but it's inherently not
-    # by the requirement to re-calculate on each invocation. If you are calling
-    # this multiple times, consider caching the value in your code.
-    #
     # @example
-    #   duration.to_human #=> "2d9h32m44s944ms429us193ns"
+    #   duration.to_s #=> "2d9h32m44s944ms429us193ns"
     #
     # @example Limit to hours
-    #   duration.to_human(:h) #=> "2d9h"
+    #   duration.to_s(:h) #=> "2d9h"
     #
     # @return [String]
-    def to_human(highest = LABEL_NANO_SECOND)
+    def to_s(highest = LABEL_NANO_SECOND)
       highest = highest.to_s if !highest.is_a?(String)
       if !LABELS_MAP.key?(highest)
         raise "Invalid label `#{highest}'!"
@@ -185,6 +181,10 @@ module Nomad
       return "0" << highest if str.empty?
       return "-" << str if negative
       return str
+    end
+
+    def inspect
+      "#<%s:0x%s %s>" % [self.class, (object_id << 1).to_s(16), "@duration=\"#{to_s}\""]
     end
   end
 end

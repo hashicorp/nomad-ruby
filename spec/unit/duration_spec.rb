@@ -11,7 +11,7 @@ module Nomad
         minutes:      -1,
         hours:        -0.016666666666666666,
         days:         -0.0006944444444444445,
-        to_human:     "-1m",
+        to_s:         "-1m",
       },
 
       0 => {
@@ -22,7 +22,7 @@ module Nomad
         minutes:      0,
         hours:        0,
         days:         0,
-        to_human:     "0ns",
+        to_s:         "0ns",
       },
 
       1 => {
@@ -33,7 +33,7 @@ module Nomad
         minutes:      0.000000000016666666666666666,
         hours:        0.0000000000002777777777777778,
         days:         0.000000000000011574074074074074,
-        to_human:     "1ns",
+        to_s:         "1ns",
       },
 
       1_000 => {
@@ -44,7 +44,7 @@ module Nomad
         minutes:      0.000000016666666666666666,
         hours:        0.00000000027777777777777776,
         days:         0.000000000011574074074074074,
-        to_human:     "1us",
+        to_s:         "1us",
       },
 
       1_000_000 => {
@@ -55,7 +55,7 @@ module Nomad
         minutes:      0.000016666666666666666,
         hours:        0.00000027777777777777776,
         days:         0.000000011574074074074074,
-        to_human:     "1ms",
+        to_s:         "1ms",
       },
 
       1_000_000_000 => {
@@ -66,7 +66,7 @@ module Nomad
         minutes:      0.016666666666666666,
         hours:        0.0002777777777777778,
         days:         0.000011574074074074073,
-        to_human:     "1s",
+        to_s:         "1s",
       },
 
       60*Duration::SECOND => {
@@ -77,7 +77,7 @@ module Nomad
         minutes:      1,
         hours:        0.016666666666666666,
         days:         0.0006944444444444445,
-        to_human:     "1m",
+        to_s:         "1m",
       },
 
       60*Duration::MINUTE => {
@@ -88,7 +88,7 @@ module Nomad
         minutes:      60,
         hours:        1,
         days:         0.041666666666666664,
-        to_human:     "1h",
+        to_s:         "1h",
       },
 
       24*Duration::HOUR => {
@@ -99,7 +99,7 @@ module Nomad
         minutes:      1_440,
         hours:        24,
         days:         1,
-        to_human:     "1d",
+        to_s:         "1d",
       },
 
       3*Duration::DAY + 7*Duration::HOUR + 22*Duration::MINUTE + 23*Duration::SECOND + 224*Duration::MILLI_SECOND => {
@@ -110,7 +110,7 @@ module Nomad
         minutes:      4_762.387066666666,
         hours:        79.37311777777778,
         days:         3.3072132407407406,
-        to_human:     "3d7h22m23s224ms",
+        to_s:         "3d7h22m23s224ms",
       },
     }.each do |i, list|
       list.sort.each do |k,v|
@@ -124,7 +124,7 @@ module Nomad
       end
     end
 
-    describe "#to_human" do
+    describe "#to_s" do
       {
         d:  "1d",
         h:  "1d2h",
@@ -145,7 +145,7 @@ module Nomad
             7*Duration::NANO_SECOND +
             0
           )
-          result = instance.to_human(label)
+          result = instance.to_s(label)
           expect(result).to eq(exp)
         end
       end
