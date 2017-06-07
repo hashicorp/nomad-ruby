@@ -113,8 +113,6 @@ module Nomad
   end
 
   class AgentMember < Response
-    extend Nomad::Stringify
-
     # The text for an "alive" member
     STATUS_ALIVE = "alive".freeze
 
@@ -136,7 +134,7 @@ module Nomad
     # @!attribute [r] tags
     #   The tags of the member (arbitary)
     #   @return [Hash<String,String>]
-    field :Tags, as: :tags, load: ->(item) { stringify_keys(item) }
+    field :Tags, as: :tags, load: :stringify_keys
 
     # @!attribute [r] status
     #   The status
@@ -194,13 +192,7 @@ module Nomad
     # @!attribute [r] error
     #   The agent configuration
     #   @return [String]
-    field :error, load: ->(item) {
-      if item.nil? || item.empty?
-        nil
-      else
-        item
-      end
-    }
+    field :error, load: :string_as_nil
 
     # @!attribute [r] num_joined
     #   The agent configuration
