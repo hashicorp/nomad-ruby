@@ -76,7 +76,7 @@ module Nomad
 
     # @!attribute [r] priority
     #   The job priority.
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :Priority, as: :priority
 
     # @!attribute [r] periodic
@@ -111,17 +111,17 @@ module Nomad
 
     # @!attribute [r] create_index
     #   The job create_index.
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :CreateIndex, as: :create_index
 
     # @!attribute [r] modify_index
     #   The job modify_index.
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :ModifyIndex, as: :modify_index
 
     # @!attribute [r] job_modify_index
     #   The job job_modify_index.
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :JobModifyIndex, as: :job_modify_index
 
     # Determines if this job is running.
@@ -154,61 +154,61 @@ module Nomad
 
     # @!attribute [r] create_index
     #   The job summary create_index.
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :CreateIndex, as: :create_index
 
     # @!attribute [r] modify_index
     #   The job summary modify_index.
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :ModifyIndex, as: :modify_index
   end
 
   class JobTaskGroupSummary < Response
     # @!attribute [r] queued
     #   The summary queued
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :Queued, as: :queued
 
     # @!attribute [r] complete
     #   The summary complete
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :Complete, as: :complete
 
     # @!attribute [r] failed
     #   The summary failed
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :Failed, as: :failed
 
     # @!attribute [r] running
     #   The summary running
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :Running, as: :running
 
     # @!attribute [r] starting
     #   The summary starting
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :Starting, as: :starting
 
     # @!attribute [r] lost
     #   The summary lost
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :Lost, as: :lost
   end
 
   class JobChildren < Response
     # @!attribute [r] pending
     #   The job pending.
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :Pending, as: :pending
 
     # @!attribute [r] running
     #   The job running.
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :Running, as: :running
 
     # @!attribute [r] dead
     #   The job dead.
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :Dead, as: :dead
   end
 
@@ -220,12 +220,12 @@ module Nomad
 
     # @!attribute [r] eval_create_index
     #   The job eval_create_index.
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :EvalCreateIndex, as: :eval_create_index
 
     # @!attribute [r] job_modify_index
     #   The job job_modify_index.
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :JobModifyIndex, as: :job_modify_index
 
     # @!attribute [r] warnings
@@ -235,12 +235,12 @@ module Nomad
 
     # @!attribute [r] index
     #   The job index.
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :Index, as: :index
 
     # @!attribute [r] last_contact
     #   The job last_contact.
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :LastContact, as: :last_contact
 
     # @!attribute [r] known_leader
@@ -279,7 +279,7 @@ module Nomad
 
     # @!attribute [r] priority
     #   The job priority.
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :Priority, as: :priority
 
     # @!attribute [r] all_at_once
@@ -353,22 +353,22 @@ module Nomad
 
     # @!attribute [r] version
     #   The job version.
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :Version, as: :version
 
     # @!attribute [r] create_index
     #   The job create_index.
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :CreateIndex, as: :create_index
 
     # @!attribute [r] modify_index
     #   The job modify_index.
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :ModifyIndex, as: :modify_index
 
     # @!attribute [r] job_modify_index
     #   The job job_modify_index.
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :JobModifyIndex, as: :job_modify_index
 
     # Determines if this job is running.
@@ -410,7 +410,7 @@ module Nomad
 
     # @!attribute [r] count
     #   The group count.
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :Count, as: :count
 
     # @!attribute [r] constraints
@@ -456,7 +456,7 @@ module Nomad
 
     # @!attribute [r] max_parallel
     #   The job max_parallel.
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :MaxParallel, as: :max_parallel
 
     # @!attribute [r] health_check
@@ -481,7 +481,7 @@ module Nomad
 
     # @!attribute [r] canary
     #   The job canary.
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :Canary, as: :canary
   end
 
@@ -554,7 +554,7 @@ module Nomad
   class JobRestartPolicy < Response
     # @!attribute [r] attempts
     #   The retry attempts.
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :Attempts, as: :attempts
 
     # @!attribute [r] interval
@@ -683,7 +683,7 @@ module Nomad
   class JobLogConfig < Response
     # @!attribute [r] max_files
     #   The log config max_files.
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :MaxFiles, as: :max_files
 
     # @!attribute [r] max_file_size

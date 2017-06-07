@@ -55,7 +55,7 @@ module Nomad
 
     # @!attribute [r] priority
     #   The evaluation priority.
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :Priority, as: :priority
 
     # @!attribute [r] type
@@ -75,7 +75,7 @@ module Nomad
 
     # @!attribute [r] job_modify_index
     #   The evaluation job_modify_index.
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :JobModifyIndex, as: :job_modify_index
 
     # @!attribute [r] node_id
@@ -140,7 +140,7 @@ module Nomad
 
     # @!attribute [r] snapshot_index
     #   The evaluation snapshot_index.
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :ShapshotIndex, as: :snapshot_index
 
     # @!attribute [r] queued_allocations
@@ -150,12 +150,12 @@ module Nomad
 
     # @!attribute [r] create_index
     #   The evaluation create_index.
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :CreateIndex, as: :create_index
 
     # @!attribute [r] modify_index
     #   The evaluation modify_index.
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :ModifyIndex, as: :modify_index
 
     # Determines if this evaluation is done.

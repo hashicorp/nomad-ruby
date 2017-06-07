@@ -130,7 +130,7 @@ module Nomad
 
     # @!attribute [r] port
     #   The rpc port of the member
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :Port, as: :port
 
     # @!attribute [r] tags
@@ -145,32 +145,32 @@ module Nomad
 
     # @!attribute [r] protocol_min
     #   The protocol_min
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :ProtocolMin, as: :protocol_min
 
     # @!attribute [r] protocol_max
     #   The protocol_max
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :ProtocolMax, as: :protocol_max
 
     # @!attribute [r] protocol_cur
     #   The protocol_cur
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :ProtocolCur, as: :protocol_cur
 
     # @!attribute [r] delegate_min
     #   The delegate_min
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :DelegateMin, as: :delegate_min
 
     # @!attribute [r] delegate_max
     #   The delegate_max
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :DelegateMax, as: :delegate_max
 
     # @!attribute [r] delegate_cur
     #   The delegate_cur
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :DelegateCur, as: :delegate_cur
 
     # Determines if this member is alive.
@@ -204,7 +204,7 @@ module Nomad
 
     # @!attribute [r] num_joined
     #   The agent configuration
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :num_joined
   end
 end

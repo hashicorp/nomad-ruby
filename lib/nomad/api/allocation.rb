@@ -122,17 +122,17 @@ module Nomad
 
     # @!attribute [r] create_index
     #   The create index
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :CreateIndex, as: :create_index
 
     # @!attribute [r] modify_index
     #   The modify index
-    #   @return [String]
+    #   @return [Integer]
     field :ModifyIndex, as: :modify_index
 
     # @!attribute [r] alloc_modify_index
     #   The allocation modify index.
-    #   @return [String]
+    #   @return [Integer]
     field :AllocModifyIndex, as: :alloc_modify_index
 
     # @!attribute [r] create_time

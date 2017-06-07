@@ -50,7 +50,7 @@ module Nomad
     class RaftConfiguration < Response
       # @!attribute [r] index
       #   The current raft index
-      #   @return [Fixnum]
+      #   @return [Integer]
       field :Index, as: :index
 
       # @!attribute [r] servers

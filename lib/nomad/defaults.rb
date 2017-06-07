@@ -12,11 +12,11 @@ module Nomad
     SSL_CIPHERS = "TLSv1.2:!aNULL:!eNULL".freeze
 
     # The default number of attempts.
-    # @return [Fixnum]
+    # @return [Integer]
     RETRY_ATTEMPTS = 2
 
     # The default backoff interval.
-    # @return [Fixnum]
+    # @return [Integer]
     RETRY_BASE = 0.05
 
     # The maximum amount of time for a single exponential backoff to sleep.

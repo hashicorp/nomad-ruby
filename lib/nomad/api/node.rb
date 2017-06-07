@@ -166,12 +166,12 @@ module Nomad
 
     # @!attribute [r] create_index
     #   The evaluation create_index.
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :CreateIndex, as: :create_index
 
     # @!attribute [r] modify_index
     #   The evaluation modify_index.
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :ModifyIndex, as: :modify_index
 
     # Determines if the ndoe is ready.
@@ -184,7 +184,7 @@ module Nomad
   class Resources < Response
     # @!attribute [r] cpu
     #   The node cpu.
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :CPU, as: :cpu
 
     # @!attribute [r] memory
@@ -199,7 +199,7 @@ module Nomad
 
     # @!attribute [r] iops
     #   The node iops.
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :IOPS, as: :iops
 
     # @!attribute [r] networks
@@ -228,7 +228,7 @@ module Nomad
 
     # @!attribute [r] megabits
     #   The network megabits.
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :MBits, as: :megabits, load: :int_as_size_in_megabits
 
     # @!attribute [r] reserved_ports
@@ -254,14 +254,14 @@ module Nomad
 
     # @!attribute [r] value
     #   The port value.
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :Value, as: :value
   end
 
   class NodeEvaluation < Response
     # @!attribute [r] heartbeat_ttl
     #   The evaluation heartbeat_ttl.
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :HeartbeatTTL, as: :heartbeat_ttl
 
     # @!attribute [r] eval_ids
@@ -271,12 +271,12 @@ module Nomad
 
     # @!attribute [r] eval_create_index
     #   The evaluation eval_create_index.
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :EvalCreateIndex, as: :eval_create_index
 
     # @!attribute [r] node_modify_index
     #   The evaluation node_modify_index.
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :NodeModifyIndex, as: :node_modify_index
 
     # @!attribute [r] leader_rpc_addr
@@ -286,7 +286,7 @@ module Nomad
 
     # @!attribute [r] num_nodes
     #   The evaluation num_nodes.
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :NumNodes, as: :num_nodes
 
     # @!attribute [r] servers
@@ -298,12 +298,12 @@ module Nomad
 
     # @!attribute [r] index
     #   The evaluation index.
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :Index, as: :index
 
     # @!attribute [r] last_contact
     #   The evaluation last_contact.
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :LastContact, as: :last_contact
 
     # @!attribute [r] known_leader
@@ -320,12 +320,12 @@ module Nomad
 
     # @!attribute [r] rpc_major_version
     #   The evaluation rpc_major_version.
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :RPCMajorVersion, as: :rpc_major_version
 
     # @!attribute [r] rpc_minor_version
     #   The evaluation rpc_minor_version.
-    #   @return [Fixnum]
+    #   @return [Integer]
     field :RPCMinorVersion, as: :rpc_minor_version
 
     # @!attribute [r] datacenter
