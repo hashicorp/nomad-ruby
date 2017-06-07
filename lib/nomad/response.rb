@@ -13,7 +13,7 @@ module Nomad
       date_as_timestamp: ->(item) { Time.at(item || 0) },
 
       # Parses the given integer as a duration.
-      int_as_duration: ->(item) { Duration.new(item || 0) },
+      nanoseconds_as_duration: ->(item) { Duration.new(item || 0) },
 
       # Parses the given integer as a "size".
       int_as_size_in_megabytes: ->(item) { Size.new(Float(item || 0) * Size::MEGABYTE) },

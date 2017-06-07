@@ -452,7 +452,7 @@ module Nomad
     # @!attribute [r] stagger
     #   The job stagger.
     #   @return [Duration]
-    field :Stagger, as: :stagger, load: :int_as_duration
+    field :Stagger, as: :stagger, load: :nanoseconds_as_duration
 
     # @!attribute [r] max_parallel
     #   The job max_parallel.
@@ -467,12 +467,12 @@ module Nomad
     # @!attribute [r] min_healthy_time
     #   The job min_healthy_time.
     #   @return [Duration]
-    field :MinHealthyTime, as: :min_healthy_time, load: :int_as_duration
+    field :MinHealthyTime, as: :min_healthy_time, load: :nanoseconds_as_duration
 
     # @!attribute [r] healthy_deadline
     #   The job healthy_deadline.
     #   @return [Duration]
-    field :HealthyDeadline, as: :healthy_deadline, load: :int_as_duration
+    field :HealthyDeadline, as: :healthy_deadline, load: :nanoseconds_as_duration
 
     # @!attribute [r] auto_revert
     #   The job auto_revert.
@@ -560,12 +560,12 @@ module Nomad
     # @!attribute [r] interval
     #   The retry interval in nanoseconds.
     #   @return [Duration]
-    field :Interval, as: :interval, load: :int_as_duration
+    field :Interval, as: :interval, load: :nanoseconds_as_duration
 
     # @!attribute [r] delay
     #   The retry delay in nanoseconds.
     #   @return [Duration]
-    field :Delay, as: :delay, load: :int_as_duration
+    field :Delay, as: :delay, load: :nanoseconds_as_duration
 
     # @!attribute [r] mode
     #   The retry mode.
@@ -643,7 +643,7 @@ module Nomad
     # @!attribute [r] kill_timeout
     #   The task kill_timeout.
     #   @return [Duration]
-    field :KillTimeout, as: :kill_timeout, load: :int_as_duration
+    field :KillTimeout, as: :kill_timeout, load: :nanoseconds_as_duration
 
     # @!attribute [r] log_config
     #   The task log_config.
@@ -755,12 +755,12 @@ module Nomad
     # @!attribute [r] interval
     #   The check interval.
     #   @return [Duration]
-    field :Interval, as: :interval, load: :int_as_duration
+    field :Interval, as: :interval, load: :nanoseconds_as_duration
 
     # @!attribute [r] timeout
     #   The check timeout.
     #   @return [Duration]
-    field :Timeout, as: :timeout, load: :int_as_duration
+    field :Timeout, as: :timeout, load: :nanoseconds_as_duration
 
     # @!attribute [r] initial_status
     #   The check initial_status.
@@ -841,7 +841,7 @@ module Nomad
     # @!attribute [r] splay
     #   The template splay.
     #   @return [Duration]
-    field :Splay, as: :splay, load: :int_as_duration
+    field :Splay, as: :splay, load: :nanoseconds_as_duration
 
     # @!attribute [r] permissions
     #   The template permissions.

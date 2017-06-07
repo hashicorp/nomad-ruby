@@ -137,7 +137,8 @@ module Nomad
 
     # @!attribute [r] create_time
     #   The time the allocation was created
-    #   @return [DateTime]
-    field :CreateTime, as: :create_time, load: :date_as_timestamp
+    #   @return [Timestamp]
+    field :CreateTime, as: :create_time, load: :nanoseconds_as_timestamp
+  end
   end
 end
