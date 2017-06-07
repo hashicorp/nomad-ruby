@@ -162,7 +162,7 @@ module Nomad
     # @!attribute [r] status_updated_at
     #   The node status_updated_at.
     #   @return [Time]
-    field :StatusUpdatedAt, as: :status_updated_at, load: :date_as_timestamp
+    field :StatusUpdatedAt, as: :status_updated_at, load: :seconds_as_timestamp
 
     # @!attribute [r] create_index
     #   The evaluation create_index.

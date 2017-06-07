@@ -10,7 +10,7 @@ module Nomad
       array_of_strings: ->(item) { Array(item).map(&:to_s) },
 
       # Parses an integer as a timestamp (18394289434).
-      date_as_timestamp: ->(item) { Time.at(item || 0) },
+      seconds_as_timestamp: ->(item) { Time.at(item || 0) },
 
       # Parses the given integer as a duration.
       nanoseconds_as_duration: ->(item) { Duration.new(item || 0) },
