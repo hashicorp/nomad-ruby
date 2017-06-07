@@ -15,6 +15,10 @@ module Nomad
       # Parses the given integer as a duration.
       nanoseconds_as_duration: ->(item) { Duration.new(item || 0) },
 
+      # Parses the given integer as the number of nanoseconds since the unix
+      # epoch.
+      nanoseconds_as_timestamp: ->(item) { Time.at((item || 0) / 1e9) },
+
       # Parses the given integer as a "size".
       int_as_size_in_megabytes: ->(item) { Size.new(Float(item || 0) * Size::MEGABYTE) },
 
