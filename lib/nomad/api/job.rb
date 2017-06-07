@@ -195,6 +195,166 @@ module Nomad
     field :Lost, as: :lost
   end
 
+  class TaskState < Response
+    TASK_STATE_SETUP                    = "Task Setup".freeze
+    TASK_STATE_SETUP_FAILURE            = "Setup Failure".freeze
+    TASK_STATE_DRIVER_FAILURE           = "Driver Failure".freeze
+    TASK_STATE_DRIVER_MESSAGE           = "Driver".freeze
+    TASK_STATE_RECEIVED                 = "Received".freeze
+    TASK_STATE_FAILED_VALIDATION        = "Failed Validation".freeze
+    TASK_STATE_STARTED                  = "Started".freeze
+    TASK_STATE_TERMINATED               = "Terminated".freeze
+    TASK_STATE_KILLING                  = "Killing".freeze
+    TASK_STATE_KILLED                   = "Killed".freeze
+    TASK_STATE_RESTARTING               = "Restarting".freeze
+    TASK_STATE_NOT_RESTARTING           = "Not Restarting".freeze
+    TASK_STATE_DOWNLOADING_ARTIFACTS    = "Downloading Artifacts".freeze
+    TASK_STATE_ARTIFACT_DOWNLOAD_FAILED = "Failed Artifact Download".freeze
+    TASK_STATE_SIBLING_FAILED           = "Sibling Task Failed".freeze
+    TASK_STATE_SIGNALING                = "Signaling".freeze
+    TASK_STATE_RESTART_SIGNAL           = "Restart Signaled".freeze
+    TASK_STATE_LEADER_DEAD              = "Leader Task Dead".freeze
+
+    # @!attribute [r] state
+    #   The state of the task
+    #   @return [String]
+    field :State, as: :state, load: :string_as_nil
+
+    # @!attribute [r] failed
+    #   Whether the task failed
+    #   @return [Boolean]
+    field :Failed, as: :failed
+
+    # @!attribute [r] started_at
+    #   The start time of the task
+    #   @return [Timestamp]
+    field :StartedAt, as: :started_at
+
+    # @!attribute [r] finished_at
+    #   The finish time of the task
+    #   @return [Timestamp]
+    field :FinishedAt, as: :finished_at
+
+    # @!attribute [r] events
+    #   The list of events for the task
+    #   @return [Array<TaskEvent>]
+    field :Events, as: :events, load: ->(item) {
+      item.map { |i| TaskEvent.decode(i) }
+    }
+  end
+
+  class TaskEvent < Response
+    # @!attribute [r] type
+    #   The type of the task event
+    #   @return [String]
+    field :Type, as: :type, load: :string_as_nil
+
+    # @!attribute [r] time
+    #   The time of the task event
+    #   @return [String]
+    field :Time, as: :time, load: :nanoseconds_as_timestamp
+
+    # @!attribute [r] fails_task
+    #   Whether the task failed
+    #   @return [Boolean]
+    field :FailsTask, as: :fails_task
+
+    # @!attribute [r] restart_reason
+    #   The reason for the restart of the task event
+    #   @return [String]
+    field :RestartReason, as: :restart_reason, load: :string_as_nil
+
+    # @!attribute [r] setup_error
+    #   The setup error of the task event
+    #   @return [String]
+    field :SetupError, as: :setup_error, load: :string_as_nil
+
+    # @!attribute [r] driver_error
+    #   The driver error of the task event
+    #   @return [String]
+    field :DriverError, as: :driver_error, load: :string_as_nil
+
+    # @!attribute [r] driver_message
+    #   The driver message of the task event
+    #   @return [String]
+    field :DriverMessage, as: :driver_message, load: :string_as_nil
+
+    # @!attribute [r] exit_code
+    #   The exit_code of the task event
+    #   @return [Integer]
+    field :ExitCode, as: :exit_code
+
+    # @!attribute [r] signal
+    #   The signal of the task event
+    #   @return [Integer]
+    field :Signal, as: :signal
+
+    # @!attribute [r] message
+    #   The message of the task event
+    #   @return [String]
+    field :Message, as: :message, load: :string_as_nil
+
+    # @!attribute [r] kill_reason
+    #   The kill_reason of the task event
+    #   @return [String]
+    field :KillReason, as: :kill_reason, load: :string_as_nil
+
+    # @!attribute [r] kill_timeout
+    #   The kill timeout of the task event
+    #   @return [Duration]
+    field :KillTimeout, as: :kill_timeout, load: :nanoseconds_as_duration
+
+    # @!attribute [r] kill_error
+    #   The kill error of the task event
+    #   @return [String]
+    field :KillError, as: :kill_error, load: :string_as_nil
+
+    # @!attribute [r] start_delay
+    #   The start delay of the task event
+    #   @return [String]
+    field :StartDelay, as: :start_delay, load: :nanoseconds_as_duration
+
+    # @!attribute [r] download_error
+    #   The download error of the task event
+    #   @return [String]
+    field :DownloadError, as: :download_error, load: :string_as_nil
+
+    # @!attribute [r] validation_error
+    #   The validation error of the task event
+    #   @return [String]
+    field :ValidationError, as: :validation_error, load: :string_as_nil
+
+    # @!attribute [r] disk_limit
+    #   The disk limit of the task event
+    #   @return [Size]
+    field :DiskLimit, as: :disk_limit, load: :int_as_size_in_megabytes
+
+    # @!attribute [r] disk_size
+    #   The disk size of the task event
+    #   @return [Size]
+    field :DiskSize, as: :disk_size, load: :int_as_size_in_megabytes
+
+    # @!attribute [r] failed_sibling
+    #   The failed sibling of the task event
+    #   @return [String]
+    field :FailedSibling, as: :failed_sibling, load: :string_as_nil
+
+    # @!attribute [r] vault_error
+    #   The vault error of the task event
+    #   @return [String]
+    field :VaultError, as: :vault_error, load: :string_as_nil
+
+    # @!attribute [r] task_signal_reason
+    #   The task signal reason of the task event
+    #   @return [String]
+    field :TaskSignalReason, as: :task_signal_reason, load: :string_as_nil
+
+    # @!attribute [r] task_signal
+    #   The task signal of the task event
+    #   @return [String]
+    field :TaskSignal, as: :task_signal, load: :string_as_nil
+  end
+
   class JobChildren < Response
     # @!attribute [r] pending
     #   The job pending.
