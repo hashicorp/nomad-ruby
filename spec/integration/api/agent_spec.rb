@@ -49,7 +49,10 @@ module Nomad
 
     describe "#self" do
       it "returns information about the queried agent" do
-        skip "too many fields"
+        result = subject.self
+        expect(result.config).to be_a(Hash)
+        expect(result.member).to be_a(AgentMember)
+        expect(result.stats).to be_a(Hash)
       end
     end
 

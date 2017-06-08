@@ -88,6 +88,24 @@ module Nomad
     end
   end
 
+  class AgentSelf < Response
+    # @!attribute [r] config
+    #   The agent configuration. This has preset fields, but they change based
+    #   on different versions of Nomad, so this returns a Hash instead.
+    #   @return [Hash<String,Object>]
+    field :config, load: :stringify_keys
+
+    # @!attribute [r] member
+    #   The agent member information
+    #   @return [AgentMember]
+    field :member, load: ->(item) { AgentMember.decode(item) }
+
+    # @!attribute [r] stats
+    #   The agent configuration
+    #   @return [Hash<String,Hash<String,String>>]
+    field :stats, load: :stringify_keys
+  end
+
   class AgentMembers < Response
     # @!attribute [r] server_name
     #   The name of this agent being queried
@@ -177,15 +195,6 @@ module Nomad
     def alive?
       self.status == STATUS_ALIVE
     end
-  end
-
-  class AgentSelf < Response
-    # @!attribute [r] config
-    #   The agent configuration
-    #   @return [Config]
-    field :config
-
-    # TODO
   end
 
   class AgentJoin < Response
