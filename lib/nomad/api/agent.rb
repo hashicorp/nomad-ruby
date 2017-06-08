@@ -58,9 +58,9 @@ module Nomad
     # Get information about the current agent (self).
     #
     # @example
-    #   Nomad.agent.self #=> TODO
+    #   Nomad.agent.self #=> #<AgentSelf ...>
     #
-    # @return [Agent]
+    # @return [AgentSelf]
     def self(options = {})
       json = client.get("/v1/agent/self", options)
       return AgentSelf.decode(json)
