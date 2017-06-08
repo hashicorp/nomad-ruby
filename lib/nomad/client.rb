@@ -120,6 +120,15 @@ module Nomad
     # @return [String, Hash]
     #   the response body
     def request(verb, path, data = {}, headers = {})
+      uri = URI.parse(path)
+      if uri.absolute?
+        new_path, uri.path, uri.fragment = uri.path, "", nil
+        client = self.class.new(options.merge(
+          address: uri.to_s,
+        ))
+        return client.request(verb, new_path, data, headers)
+      end
+
       # Build the URI and request object from the given information
       path = build_uri(verb, path, data)
       req = class_for_request(verb).new(path)

@@ -26,8 +26,8 @@ Connect to a Nomad API. For most API calls, it does not matter if you are
 connecting to a client or server node. In general, try to connect to the node
 with the lowest latency.
 
-Development
------------
+## Development
+
 1. Clone the project on GitHub
 2. Create a feature branch
 3. Submit a Pull Request
