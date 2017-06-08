@@ -8,8 +8,20 @@ module Nomad
     # @return [Hash]
     def stringify_keys(hash)
       (hash || {}).inject({}) do |h, (key, value)|
-        value = value.map { |h| stringify_keys(h) } if value.is_a?(Array)
-        value = stringify_keys(value) if value.is_a?(Hash)
+        if value.is_a?(Array)
+          value = value.map do |i|
+            if i.is_a?(Hash) || i.is_a?(Array)
+              stringify_keys(i)
+            else
+              i
+            end
+          end
+        end
+
+        if value.is_a?(Hash)
+          value = stringify_keys(value)
+        end
+
         h[key.to_s] = value
         h
       end
