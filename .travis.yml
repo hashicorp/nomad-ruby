@@ -6,7 +6,6 @@ cache: bundler
 
 env:
   - NOMAD_VERSION=0.5.6
-  - NOMAD_VERSION=0.4.1
 
 before_install:
   - curl -sLo nomad.zip https://releases.hashicorp.com/nomad/${NOMAD_VERSION}/nomad_${NOMAD_VERSION}_linux_amd64.zip
@@ -20,6 +19,4 @@ branches:
     - master
 
 rvm:
-  - 2.2
-  - 2.3
   - 2.4

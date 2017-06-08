@@ -6,7 +6,7 @@ Nomad Ruby is the official Ruby client for interacting with [Nomad](https://www.
 
 ## Quick Start
 
-Install Ruby 2.0+: [Guide](https://www.ruby-lang.org/en/documentation/installation/).
+Install Ruby 2.4+: [Guide](https://www.ruby-lang.org/en/documentation/installation/).
 
 Install via Rubygems:
 
