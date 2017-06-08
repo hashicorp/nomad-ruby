@@ -12,10 +12,8 @@ module RSpec
     end
 
     def initialize
-      return
-
       io = Tempfile.new("nomad-server")
-      pid = Process.spawn({}, "sudo nomad agent -dev", out: io.to_i, err: io.to_i)
+      pid = Process.spawn({}, "nomad agent -dev", out: io.to_i, err: io.to_i)
 
       at_exit do
         Process.kill("INT", pid)
