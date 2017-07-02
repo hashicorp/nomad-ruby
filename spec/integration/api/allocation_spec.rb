@@ -69,5 +69,15 @@ module Nomad
         expect(result.task_states).to be_a(Hash)
       end
     end
+
+    describe "#for_job" do
+      it "reads allocations for a specific job" do
+        result = subject.for_job "job"
+        expect(result).to be
+        expect(result).to be_a(Array)
+        expect(result.count).to eq(3)
+        expect(result.first).to be_a(Alloc)
+      end
+    end
   end
 end
