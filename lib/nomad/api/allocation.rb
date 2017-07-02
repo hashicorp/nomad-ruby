@@ -32,6 +32,18 @@ module Nomad
       json = client.get("/v1/allocation/#{CGI.escape(id)}", options)
       return Alloc.decode(json)
     end
+
+    # Read all allocations for a given job
+    #
+    # @param [String] job_id The Job ID of the job
+    #
+    # @return Array<Alloc>
+    def for_job(job_id, **options)
+      json = client.get("/v1/job/#{CGI.escape(job_id)}/allocations", options)
+      return json.map do |alloc_json|
+        Alloc.decode(alloc_json)
+      end
+    end
   end
 
   class Alloc < Response
