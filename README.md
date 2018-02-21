@@ -111,4 +111,14 @@ Important Notes:
 - **Tests are order independent.** The default RSpec configuration randomizes the test order, so this should not be a problem.
 - **Integration tests require Nomad**  Nomad must be available in the path for the integration tests to pass.
 
+### How To Run The Tests
+
+```
+$ bundle install
+$ bundle exec rake
+```
+
+
+
+
 [yarddoc]: http://www.rubydoc.info/github/hashicorp/nomad-ruby
