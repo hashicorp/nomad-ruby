@@ -31,7 +31,7 @@ module Nomad
 
       # Parses the value as a string, converting "" to nil (go compat).
       string_as_nil: ->(item) {
-        if item.nil? || item.strip.empty?
+        if item.nil? || item.to_s.strip.empty?
           nil
         else
           item

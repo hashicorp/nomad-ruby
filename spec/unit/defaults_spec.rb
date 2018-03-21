@@ -22,6 +22,15 @@ module Nomad
       end
     end
 
+    describe ".nomad_token" do
+      it "uses ENV['NOMAD_TOKEN'] if present" do
+        with_stubbed_env("NOMAD_TOKEN" => "test") do
+          expect(Defaults.nomad_token).to eq("test")
+        end
+      end
+    end
+
+
     describe ".hostname" do
       it "defaults to ENV['NOMAD_TLS_SERVER_NAME']" do
         with_stubbed_env("NOMAD_TLS_SERVER_NAME" => "www.foo.com") do

@@ -136,6 +136,9 @@ module Nomad
       # Get a list of headers
       headers = DEFAULT_HEADERS.merge(headers)
 
+      # Dynamically read Nomad ACL token
+      headers = headers.merge({"X-Nomad-Token" => nomad_token})
+
       # Add headers
       headers.each do |key, value|
         req.add_field(key, value)
