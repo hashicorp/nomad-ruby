@@ -42,6 +42,10 @@ module Nomad
         ENV["NOMAD_ADDR"] || NOMAD_ADDRESS
       end
 
+      def nomad_token
+        ENV["NOMAD_TOKEN"]
+      end
+
       # The SNI host to use when connecting to Nomad via TLS.
       # @return [String, nil]
       def hostname

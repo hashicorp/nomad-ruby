@@ -5,6 +5,7 @@ module Nomad
     def self.keys
       @keys ||= [
         :address,
+        :nomad_token,
         :hostname,
         :open_timeout,
         :proxy_address,
