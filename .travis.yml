@@ -10,7 +10,7 @@ env:
 before_install:
   - curl -sLo nomad.zip https://releases.hashicorp.com/nomad/${NOMAD_VERSION}/nomad_${NOMAD_VERSION}_linux_amd64.zip
   - unzip nomad.zip
-  - mkdir ~/bin
+  - mkdir -p ~/bin
   - mv nomad ~/bin
   - export PATH="~/bin:$PATH"
 
