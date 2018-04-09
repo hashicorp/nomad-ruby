@@ -11,6 +11,48 @@ module Nomad
   end
 
   class Job < Request
+    # Dispatch parametrized job
+    #
+    # @example
+    #   Nomad.job.dispatch 'task/uuid-uuid-uuid', 'blabla', {
+    #
+    #   } #=> #<JobDispatch ...>
+    #
+    # @option [String] :name
+    #   dispatch job based on the given name
+    #
+    # @option [String] :payload_contents
+    #   dispatch job payload file content
+    #
+    # @option [Hash] :meta
+    #   dispatch job meta parameters
+    #
+    # @return [JobDispatch]
+    def dispatch(name, payload_contents, meta, **options)
+      encoded_payload_contents = Base64.encode64(payload_contents)
+      payload = {
+        Payload: encoded_payload,
+        Meta: meta
+      }
+      body = JSON.fast_generate(payload)
+      json = client.post("/v1/job/#{CGI.escape(name)}/dispatch", body, options)
+      return JobDispatch.decode(json)
+    end
+
+    # Stop nomad job by job name
+    #
+    # @example
+    #   Nomad.job.stop 'task/uuid-uuid-uuid' #=> #<JobStop ...>
+    #
+    # @option [String] :name
+    #   stop job based on the given name
+    #
+    # @return [JobStop]
+    def stop(name, **options)
+        json = client.delete("/v1/job/#{CGI.escape(name)}", options)
+        return JobStop.decode(json)
+    end
+
     # Get the address and port of the current leader for this region
     #
     # @example
@@ -838,6 +880,50 @@ module Nomad
     #   The task leader.
     #   @return [Boolean]
     field :Leader, as: :leader
+  end
+
+  class JobStop < Response
+    # @!attribute [r] eval_id
+    #   The stoped job index.
+    #   @return [String]
+    field :EvalID, as: :eval_id
+
+    # @!attribute [r] eval_create_index
+    #   The stoped job eval_create_index.
+    #   @return [String]
+    field :EvalCreateIndex, as: :eval_create_index
+
+    # @!attribute [r] index
+    #   The stoped job job_modify_index.
+    #   @return [String]
+    field :JobModifyIndex, as: :job_modify_index
+  end
+
+  class JobDispatch < Response
+    # @!attribute [r] index
+    #   The dispatched job index.
+    #   @return [String]
+    field :Index, as: :index
+
+    # @!attribute [r] job_create_index
+    #   The dispatched job_create_index.
+    #   @return [String]
+    field :JobCreateIndex, as: :job_create_index
+
+    # @!attribute [r] eval_create_index
+    #   The dispatched job eval_create_index.
+    #   @return [String]
+    field :EvalCreateIndex, as: :eval_create_index
+
+    # @!attribute [r] eval_id
+    #   The dispatched job eval_id.
+    #   @return [String]
+    field :EvalID, as: :eval_id
+
+    # @!attribute [r] dispatched_job_id
+    #   The dispatched job id.
+    #   @return [String]
+    field :DispatchedJobID, as: :dispatched_job_id
   end
 
   class JobLogConfig < Response
