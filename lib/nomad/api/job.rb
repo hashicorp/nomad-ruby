@@ -49,6 +49,16 @@ module Nomad
       json = client.get("/v1/job/#{CGI.escape(name)}", options)
       return JobVersion.decode(json)
     end
+
+    # Stops the job with the given name.
+    #
+    # @param [String] name The job name (ID).
+    #
+    # @return [JobStop]
+    def stop(name, **options)
+      json = client.delete("/v1/job/#{CGI.escape(name)}", options)
+      return JobStop.decode(json)
+    end
   end
 
   class JobItem < Response
@@ -1029,5 +1039,23 @@ module Nomad
     #   The dispatch payload file.
     #   @return [String]
     field :File, as: :file, load: :string_as_nil
+  end
+
+  class JobStop < Response
+    # @!attribute [r] eval_id
+    #   The job eval_id.
+    #   @return [String]
+    field :EvalID, as: :eval_id, load: :string_as_nil
+
+    # @!attribute [r] eval_create_index
+    #   The job eval_create_index.
+    #   @return [Integer]
+    field :EvalCreateIndex, as: :eval_create_index
+
+    # @!attribute [r] job_modify_index
+    #   The job job_modify_index.
+    #   @return [Integer]
+    field :JobModifyIndex, as: :job_modify_index
+
   end
 end
