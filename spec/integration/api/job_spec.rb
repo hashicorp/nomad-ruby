@@ -28,6 +28,16 @@ module Nomad
       end
     end
 
+    describe "#stop" do
+      it "stops a job" do
+        job = JSON.parse(File.read(File.expand_path("../../../support/jobs/job.json", __FILE__)))
+        subject.create(job)
+        result = subject.stop("job")
+
+        expect(result).to be_a(JobStop)
+      end
+    end
+
     describe "#read" do
       it "reads a job" do
         job = subject.read("job")
